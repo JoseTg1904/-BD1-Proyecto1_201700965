@@ -2,7 +2,7 @@ CREATE TABLE Area(
     ID_Area INT NOT NULL AUTO_INCREMENT,
     tituloArea VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID_Area)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Cliente(
     ID_Cliente INT NOT NULL AUTO_INCREMENT,
@@ -13,7 +13,7 @@ CREATE TABLE Cliente(
     telefono VARCHAR(10) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     PRIMARY KEY (ID_Cliente)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Departamento(
     ID_Departamento INT NOT NULL AUTO_INCREMENT,
@@ -21,7 +21,7 @@ CREATE TABLE Departamento(
     ID_Area INT NOT NULL,
     PRIMARY KEY (ID_Departamento),
     FOREIGN KEY (ID_Area) REFERENCES Area(ID_Area) 
-) TYPE = INNODB;
+);
 
 CREATE TABLE Funcion(
     ID_Funcion INT NOT NULL AUTO_INCREMENT,
@@ -30,13 +30,13 @@ CREATE TABLE Funcion(
     ID_Departamento INT NOT NULL,
     PRIMARY KEY (ID_Funcion),
     FOREIGN KEY (ID_Departamento) REFERENCES Departamento(ID_Departamento)
-) TYPE = INNODB;
+);
 
 CREATE TABLE TipoPuesto(
     ID_TipoPuesto INT NOT NULL AUTO_INCREMENT,
     tipoPuesto VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID_TipoPuesto)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Empleado(
     ID_Empleado INT NOT NULL AUTO_INCREMENT,
@@ -54,13 +54,13 @@ CREATE TABLE Empleado(
     PRIMARY KEY (ID_Empleado),
     FOREIGN KEY (ID_TipoPuesto) REFERENCES TipoPuesto(ID_TipoPuesto),
     FOREIGN KEY (ID_Departamento) REFERENCES Departamento(ID_Departamento)
-) TYPE = INNODB;
+);
 
 CREATE TABLE TipoSeguro(
     ID_TipoSeguro INT NOT NULL AUTO_INCREMENT,
     tipoSeguro VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID_TipoSeguro)
-) TYPE = INNODB;
+);
 
 CREATE TABLE HistorialLlamada(
     ID_HistorialLlamada INT NOT NULL AUTO_INCREMENT,
@@ -73,13 +73,13 @@ CREATE TABLE HistorialLlamada(
     PRIMARY KEY (ID_HistorialLlamada),
     FOREIGN KEY (ID_TipoSeguro) REFERENCES TipoSeguro(ID_TipoSeguro),
     FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado)
-) TYPE = INNODB; 
+); 
 
 CREATE TABLE TiempoPago(
     ID_TiempoPago INT NOT NULL AUTO_INCREMENT,
     tiempoPago VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID_TiempoPago)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Seguro(
     ID_Seguro INT NOT NULL AUTO_INCREMENT,
@@ -95,7 +95,7 @@ CREATE TABLE Seguro(
     FOREIGN KEY (ID_TipoSeguro) REFERENCES TipoSeguro(ID_TipoSeguro),
     FOREIGN KEY (ID_TiempoPago) REFERENCES TiempoPago(ID_TiempoPago),
     FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
-) TYPE = INNODB;
+);
 
 ALTER TABLE Seguro AUTO_INCREMENT = 10000;
 
@@ -103,7 +103,7 @@ CREATE TABLE FormaPago(
     ID_FormaPago INT NOT NULL AUTO_INCREMENT,
     formaPago VARCHAR(20) NOT NULL,
     PRIMARY KEY (ID_FormaPago)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Pago(
     ID_Pago INT NOT NULL AUTO_INCREMENT,
@@ -117,4 +117,4 @@ CREATE TABLE Pago(
     FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado),
     FOREIGN KEY (ID_FormaPago) REFERENCES FormaPago(ID_FormaPago),
     FOREIGN KEY (ID_Seguro) REFERENCES Seguro(ID_Seguro)
-) TYPE = INNODB;
+);

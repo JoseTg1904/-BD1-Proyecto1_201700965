@@ -6,13 +6,13 @@ CREATE TABLE Proveedor(
     correo VARCHAR(50) NOT NULL,
     empresa VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID_Proveedor)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Departamento(
     ID_Departamento INT NOT NULL AUTO_INCREMENT,
     departamento VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID_Departamento)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Municipio(
     ID_Municipio INT NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE Municipio(
     ID_Departamento INT NOT NULL,
     PRIMARY KEY (ID_Municipio),
     FOREIGN KEY (ID_Departamento) REFERENCES Departamento(ID_Departamento)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Sucursal(
     ID_Sucursal INT NOT NULL AUTO_INCREMENT,
@@ -31,7 +31,7 @@ CREATE TABLE Sucursal(
     ID_Municipio INT NOT NULL,
     PRIMARY KEY (ID_Sucursal),
     FOREIGN KEY (ID_Municipio) REFERENCES Municipio(ID_Municipio)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Vehiculo(
     placa VARCHAR(7) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE Vehiculo(
     PRIMARY KEY (placa),
     FOREIGN KEY (ID_Proveedor) REFERENCES Proveedor(ID_Proveedor),
     FOREIGN KEY (ID_Sucursal) REFERENCES Sucursal(ID_Sucursal)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Empleado(
     cui INT NOT NULL,
@@ -59,8 +59,8 @@ CREATE TABLE Empleado(
     sueldo INT NOT NULL DEFAULT 2300,
     ID_Sucursal INT NOT NULL,
     PRIMARY KEY (cui),
-    PRIMARY KEY (ID_Sucursal) REFERENCES Sucursal(ID_Sucursal)
-) TYPE = INNODB;
+    FOREIGN KEY (ID_Sucursal) REFERENCES Sucursal(ID_Sucursal)
+);
 
 CREATE TABLE Movimiento(
     ID_Movimiento INT NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ CREATE TABLE Movimiento(
     cui INT NOT NULL,
     PRIMARY KEY (ID_Movimiento),
     FOREIGN KEY (cui) REFERENCES Empleado(cui)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Cliente(
     cuiC INT NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE Cliente(
     direccion VARCHAR(100),
     telCasa VARCHAR(10),
     PRIMARY KEY (cuiC)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Tarjeta(
     noTarjeta INT NOT NULL,
@@ -89,29 +89,29 @@ CREATE TABLE Tarjeta(
     cuiC INT NOT NULL,
     PRIMARY KEY (noTarjeta),
     FOREIGN KEY (cuiC) REFERENCES Cliente(cuiC)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Descuento(
     ID_Descuento INT NOT NULL AUTO_INCREMENT,
     motivo TEXT NOT NULL,
     PRIMARY KEY (ID_Descuento)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Credito(
     ID_Credito INT NOT NULL AUTO_INCREMENT,
     banco VARCHAR(50) NOT NULL,
     noTarjeta INT NOT NULL,
-    monto DECIMAL(2, 10) NOT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
     fecha DATE NOT NULL,
     PRIMARY KEY (ID_Credito)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Contado(
     ID_Contado INT NOT NULL AUTO_INCREMENT,
-    monto DECIMAL(2, 10) NOT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
     fecha DATE NOT NULL,
     PRIMARY KEY (ID_Contado)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Transaccion(
     ID_Transaccion INT NOT NULL AUTO_INCREMENT,
@@ -131,4 +131,4 @@ CREATE TABLE Transaccion(
     FOREIGN KEY (cui) REFERENCES Empleado(cui),
     FOREIGN KEY (ID_Sucursal) REFERENCES Sucursal(ID_Sucursal),
     FOREIGN KEY (placa) REFERENCES Vehiculo(placa)
-) TYPE = INNODB;
+);

@@ -8,7 +8,7 @@ CREATE TABLE Denunciante(
     lugarActual VARCHAR(100) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
     PRIMARY KEY (cui)
-) TYPE = INNODB;
+);
 
 CREATE TABLE SinReconocer(
     ID_SinReconocer INT NOT NULL AUTO_INCREMENT,
@@ -17,7 +17,7 @@ CREATE TABLE SinReconocer(
     edad INT NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
     PRIMARY KEY (ID_SinReconocer)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Posesion(
     ID_Posesion INT NOT NULL AUTO_INCREMENT,
@@ -26,7 +26,7 @@ CREATE TABLE Posesion(
     ID_SinReconocer INT NOT NULL,
     PRIMARY KEY (ID_Posesion),
     FOREIGN KEY (ID_SinReconocer) REFERENCES SinReconocer(ID_SinReconocer)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Desaparecido(
     ID_Desaparecido INT NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ CREATE TABLE Desaparecido(
     ID_SinReconocer INT,
     PRIMARY KEY (ID_Desaparecido),
     FOREIGN KEY (ID_SinReconocer) REFERENCES SinReconocer(ID_SinReconocer)
-) TYPE = INNODB;
+);
 
 CREATE TABLE Denuncia(
     ID_Denuncia INT NOT NULL AUTO_INCREMENT,
@@ -51,4 +51,4 @@ CREATE TABLE Denuncia(
     PRIMARY KEY (ID_Denuncia),
     FOREIGN KEY (cui) REFERENCES Denunciante(cui),
     FOREIGN KEY (ID_Desaparecido) REFERENCES Desaparecido(ID_Desaparecido)
-) TYPE = INNODB;
+);
